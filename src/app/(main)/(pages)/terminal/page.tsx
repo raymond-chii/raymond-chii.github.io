@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Terminal from '@/components/global/terminal';
+import './terminal.css';
 
 const TerminalPage = () => {
   return (
@@ -10,7 +11,9 @@ const TerminalPage = () => {
             <h1 className="text-4xl font-bold mb-2">Terminal</h1>
             <p className="text-lg text-gray-600">Welcome to Raymond's profile</p>
         </div>
-      <Terminal />
+      <div className="desktop-background">
+        <Terminal />
+      </div>
     </div>
   );
 };

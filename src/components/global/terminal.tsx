@@ -1,76 +1,94 @@
-"use client";
-
-import React from 'react';
-import { ReactTerminal } from 'react-terminal-component';
-import { EmulatorState, OutputFactory, CommandMapping, DefaultCommandMapping } from 'javascript-terminal';
-
-// Define custom commands with option definitions and correct types
-const customCommands: { [key: string]: { function: (state: any, opts: any) => { output: any }, optDef: object } } = {
-  whoami: {
-    function: () => {
-      return {
-        output: OutputFactory.makeTextOutput('Raymond (Lei) Chi')
-      };
-    },
-    optDef: {}
-  },
-  ls: {
-    function: () => {
-      return {
-        output: OutputFactory.makeTextOutput('about projects contact resume')
-      };
-    },
-    optDef: {}
-  },
-  cd: {
-    function: (state, opts) => {
-      console.log("cd command called with opts:", opts);
-      const directory = opts[0];
-      console.log("Directory:", directory);
-      if (['about', 'projects', 'contact', 'resume'].includes(directory)) {
-        window.location.href = `/${directory}`;
-        return { output: OutputFactory.makeTextOutput(`Navigating to ${directory}...`) };
-      } else {
-        return { output: OutputFactory.makeTextOutput(`Invalid directory: ${directory}`) };
-      }
-    },
-    optDef: {
-      0: {
-        description: 'Directory to navigate to',
-        type: 'string',
-        required: true,
-      }
-    }
-  }
-};
-
-// Create an initial state with the custom commands
-const emulatorState = EmulatorState.create({
-  commandMapping: CommandMapping.create({
-    ...DefaultCommandMapping,
-    ...customCommands
-  })
-});
+import React, { useState, useEffect, useRef } from 'react';
 
 const Terminal = () => {
+  const [input, setInput] = useState('');
+  const [history, setHistory] = useState<string[]>([]);
+  const [output, setOutput] = useState<string[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
+  const handleCommand = (command: string) => {
+    let newOutput = [...output];
+    newOutput.push(`guest@system:~$ ${command}`);
+
+    if (command.trim() !== '') {
+      switch (command.trim()) {
+        case 'whoami':
+          newOutput.push('Raymond (Lei) Chi');
+          break;
+        case 'ls':
+          newOutput.push('about projects contact resume');
+          break;
+        case 'clear':
+          newOutput = [];
+          break;
+        case 'help':
+          newOutput.push(
+            `Available commands:\n` +
+            `whoami - Displays the current user\n` +
+            `ls - Lists available directories\n` +
+            `cd <directory> - Changes to the specified directory\n` +
+            `clear - Clears the terminal screen\n` +
+            `help - Displays this help message`
+          );
+          break;
+        default:
+          if (command.startsWith('cd ')) {
+            const dir = command.split(' ')[1];
+            if (['about', 'projects', 'contact', 'resume'].includes(dir)) {
+              window.location.href = `/${dir}`;
+              return;
+            } else {
+              newOutput.push(`Invalid directory: ${dir}`);
+            }
+          } else {
+            newOutput.push(`Command not found: ${command}`);
+          }
+      }
+    }
+
+    setOutput(newOutput);
+    setHistory([...history, command]);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleCommand(input.trim());
+    setInput('');
+  };
+
   return (
-    <div className="terminal-container">
-      <ReactTerminal
-        emulatorState={emulatorState}
-        theme={{
-          background: '#2D2D2D',
-          promptSymbolColor: '#D4D4D4',
-          commandColor: '#D4D4D4',
-          outputColor: '#D4D4D4',
-          errorColor: '#F2777A',
-          fontFamily: 'monospace',
-          fontSize: '14px',
-          spacing: '1%',
-          letterSpacing: '0.1em'
-        }}
-        welcomeMessage="Welcome to the terminal! Type 'cd <directory>' to navigate."
-        prompt="guest@system:~$"
-      />
+    <div className="terminal-window">
+      <div className="terminal-header">
+        <div className="terminal-buttons">
+          <span className="close"></span>
+          <span className="minimize"></span>
+          <span className="maximize"></span>
+        </div>
+        <div className="terminal-title">Terminal</div>
+      </div>
+      <div className="terminal-body">
+        <div className="output" style={{ marginBottom: '10px' }}>
+          <div>Type "help" for help</div>
+          {output.map((line, index) => (
+            <div key={index}>{line}</div>
+          ))}
+        </div>
+        <form onSubmit={handleSubmit} style={{ display: 'flex' }}>
+          <span>guest@system:~$ </span>
+          <input
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            style={{ backgroundColor: 'transparent', border: 'none', color: '#D4D4D4', outline: 'none', flexGrow: 1 }}
+          />
+        </form>
+      </div>
     </div>
   );
 };

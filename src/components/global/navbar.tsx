@@ -19,10 +19,10 @@ const Navbar = (props: Props) => {
             <Link href="/projects">Projects</Link>
           </li>
           <li>
-            <Link href="#">Contact</Link>
+            <Link href="/contact">Contact</Link>
           </li>
           <li>
-            <Link href="#">Resume</Link>
+            <Link href="/resume">Resume</Link>
           </li>
         </ul>
       </nav>
