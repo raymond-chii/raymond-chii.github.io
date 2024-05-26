@@ -62,6 +62,12 @@ const Terminal = () => {
     setInput('');
   };
 
+  const renderOutput = (text: string) => {
+    return text.split('\n').map((line, index) => (
+      <div key={index}>{line}</div>
+    ));
+  };
+
   return (
     <div className="terminal-window">
       <div className="terminal-header">
@@ -76,7 +82,7 @@ const Terminal = () => {
         <div className="output">
           <div>Type "help" for help</div>
           {output.map((line, index) => (
-            <div key={index}>{line}</div>
+            <div key={index}>{renderOutput(line)}</div>
           ))}
         </div>
         <form onSubmit={handleSubmit}>

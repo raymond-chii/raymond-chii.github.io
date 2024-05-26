@@ -11,7 +11,7 @@ const About = () => {
       </div>
       <TracingBeam>
         <div className="relative z-10 text-center mb-8">
-          <div className="h-96 relative w-full overflow-hidden flex flex-col items-center justify-center rounded-lg">
+          <div className="h-24 relative w-full overflow-hidden flex flex-col items-center justify-center rounded-lg">
             <div className="absolute inset-0 w-full h-full bg-black z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
             <h1 className={cn("md:text-4xl text-xl text-white relative z-20")}>About Me</h1>
             <p className="text-lg text-gray-400">Raymond (Lei) Chi</p>
@@ -19,7 +19,7 @@ const About = () => {
         </div>
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between mb-8">
           <img
-            src="/profile.jpg" // Replace this with your actual profile image
+            src="/profile.jpg" 
             alt="Raymond (Lei) Chi"
             className="w-48 h-48 rounded-full mb-4 md:mb-0"
           />
