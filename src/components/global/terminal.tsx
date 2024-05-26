@@ -73,19 +73,18 @@ const Terminal = () => {
         <div className="terminal-title">Terminal</div>
       </div>
       <div className="terminal-body">
-        <div className="output" style={{ marginBottom: '10px' }}>
+        <div className="output">
           <div>Type "help" for help</div>
           {output.map((line, index) => (
             <div key={index}>{line}</div>
           ))}
         </div>
-        <form onSubmit={handleSubmit} style={{ display: 'flex' }}>
+        <form onSubmit={handleSubmit}>
           <span>guest@system:~$ </span>
           <input
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            style={{ backgroundColor: 'transparent', border: 'none', color: '#D4D4D4', outline: 'none', flexGrow: 1 }}
           />
         </form>
       </div>

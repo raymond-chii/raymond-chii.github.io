@@ -1,85 +1,90 @@
+/* terminal.css */
 .desktop-background {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background-image: url('/desktop.png');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Ensure the background covers the full height */
+  background-image: url('/desktop.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4rem; /* Add padding to prevent overlap with the nav */
+}
+
+.terminal-window {
+  width: 100%;
   
-  .terminal-window {
-    width: 80%;
-    max-width: 600px;
-    height: 50%;
-    background-color: #2D2D2D;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-  }
-  
-  .terminal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    padding: 8px;
-    color: #fff;
-  }
-  
-  .terminal-buttons {
-    display: flex;
-    gap: 4px;
-  }
-  
-  .terminal-buttons span {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
-  }
-  
-  .close {
-    background-color: #ff5f56;
-  }
-  
-  .minimize {
-    background-color: #ffbd2e;
-  }
-  
-  .maximize {
-    background-color: #27c93f;
-  }
-  
-  .terminal-title {
-    flex-grow: 1;
-    text-align: center;
-    font-weight: bold;
-  }
-  
-  .terminal-body {
-    padding: 10px;
-    font-family: monospace;
-    font-size: 14px;
-    color: #D4D4D4;
-  }
-  
-  .output {
-    margin-bottom: 10px;
-  }
-  
-  form {
-    display: flex;
-    gap: 4px;
-  }
-  
-  input {
-    background-color: transparent;
-    border: none;
-    color: #D4D4D4;
-    outline: none;
-    flex-grow: 1;
-  }
-  
+  height: 70%; /* Increase height to fill more of the container */
+  background-color: #2D2D2D;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 8px;
+  color: #fff;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.terminal-buttons span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.close {
+  background-color: #ff5f56;
+}
+
+.minimize {
+  background-color: #ffbd2e;
+}
+
+.maximize {
+  background-color: #27c93f;
+}
+
+.terminal-title {
+  flex-grow: 1;
+  text-align: center;
+  font-weight: bold;
+}
+
+.terminal-body {
+  flex-grow: 1; 
+  padding: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  color: #D4D4D4;
+  overflow-y: auto; 
+}
+
+.output {
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  gap: 4px;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  color: #D4D4D4;
+  outline: none;
+  flex-grow: 1;
+}

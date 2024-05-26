@@ -1,15 +1,23 @@
 import React from "react";
 import { TracingBeam } from "@/components/ui/tracing-beam";
+import { Boxes } from "@/components/ui/background-boxes";
+import { cn } from "@/lib/utils";
 
 const About = () => {
   return (
-    <div className="min-h-screen p-4">
+    <div className="relative min-h-screen p-4 bg-black text-white">
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <Boxes />
+      </div>
       <TracingBeam>
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">About Me</h1>
-          <p className="text-lg text-gray-600">Raymond (Lei) Chi</p>
+        <div className="relative z-10 text-center mb-8">
+          <div className="h-96 relative w-full overflow-hidden flex flex-col items-center justify-center rounded-lg">
+            <div className="absolute inset-0 w-full h-full bg-black z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
+            <h1 className={cn("md:text-4xl text-xl text-white relative z-20")}>About Me</h1>
+            <p className="text-lg text-gray-400">Raymond (Lei) Chi</p>
+          </div>
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-between mb-8">
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between mb-8">
           <img
             src="/profile.jpg" // Replace this with your actual profile image
             alt="Raymond (Lei) Chi"
@@ -25,7 +33,7 @@ const About = () => {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <h2 className="text-2xl font-semibold mb-4">Education</h2>
             <ul className="list-disc pl-5 space-y-2">
@@ -72,17 +80,17 @@ const About = () => {
             </ul>
           </div>
         </div>
-        <div className="mt-8">
+        <div className="relative z-10 mt-8">
           <h2 className="text-2xl font-semibold mb-4">Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gray-100 p-4 rounded-lg">
+            <div className="bg-gray-800 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">Project 1</h3>
               <p>
                 A web application that allows users to track their fitness
                 progress and set goals.
               </p>
             </div>
-            <div className="bg-gray-100 p-4 rounded-lg">
+            <div className="bg-gray-800 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">Project 2</h3>
               <p>
                 An e-commerce platform that provides a seamless shopping
