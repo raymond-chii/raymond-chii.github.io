@@ -22,8 +22,8 @@ const Resume = () => {
         <div className="relative z-10 text-center mb-8">
           <div className="h-24 relative w-full overflow-hidden flex flex-col items-center justify-center rounded-lg">
             <div className="absolute inset-0 w-full h-full bg-black z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
-            <h1 className={cn("md:text-4xl text-xl text-white relative z-20")}>My Contact Info</h1>
-            <p className="text-lg text-gray-400">Feel free to reach out</p>
+            <h1 className={cn("md:text-4xl text-xl text-white relative z-20 font-medium")}>My Resume</h1>
+            <p className="text-lg text-gray-400">Download it from here</p>
           </div>
         </div>
         <div className="flex justify-center mb-8">

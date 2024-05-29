@@ -13,7 +13,7 @@ const About = () => {
         <div className="relative z-10 text-center mb-8">
           <div className="h-24 relative w-full overflow-hidden flex flex-col items-center justify-center rounded-lg">
             <div className="absolute inset-0 w-full h-full bg-black z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
-            <h1 className={cn("md:text-4xl text-xl text-white relative z-20")}>About Me</h1>
+            <h1 className={cn("md:text-4xl text-xl text-white relative z-20 font-medium")}>About Me</h1>
             <p className="text-lg text-gray-400">Raymond (Lei) Chi</p>
           </div>
         </div>

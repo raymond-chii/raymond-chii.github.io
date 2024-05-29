@@ -14,26 +14,12 @@ import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 const Globe = dynamic(() => import('react-globe.gl'), { ssr: false });
 
 const Contact = () => {
-  const [city, setCity] = useState('New York');
-  const [latitude, setLatitude] = useState(40.7128);
-  const [longitude, setLongitude] = useState(-74.0060);
-  const [timeZone, setTimeZone] = useState('America/New_York');
-  const [isMounted, setIsMounted] = useState(false);
+  const [timeZone] = useState('America/New_York');
   const [currentTime, setCurrentTime] = useState('');
 
   useEffect(() => {
-    setIsMounted(true);
     setCurrentTime(moment().tz(timeZone).format('MMMM Do YYYY, h:mm:ss a'));
   }, [timeZone]);
-
-  const handleCityChange = (e: { target: { name: any; value: any; }; }) => {
-    const { name, value } = e.target;
-
-    if (name === 'city') setCity(value);
-    if (name === 'latitude') setLatitude(parseFloat(value));
-    if (name === 'longitude') setLongitude(parseFloat(value));
-    if (name === 'timezone') setTimeZone(value);
-  };
 
   return (
     <div className="relative min-h-screen p-4 bg-black text-white">
@@ -44,7 +30,7 @@ const Contact = () => {
         <div className="relative z-10 text-center mb-8">
           <div className="h-24 relative w-full overflow-hidden flex flex-col items-center justify-center rounded-lg">
             <div className="absolute inset-0 w-full h-full bg-black z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
-            <h1 className={cn("md:text-4xl text-xl text-white relative z-20")}>My Contact Info</h1>
+            <h1 className={cn("md:text-4xl text-xl text-white relative z-20 font-medium")}>My Contact Info</h1>
             <p className="text-lg text-gray-400">Feel free to reach out</p>
           </div>
           <div className="contact-info flex justify-center space-x-6 mt-6">
@@ -67,42 +53,30 @@ const Contact = () => {
         
         <div className="relative z-10">
           <div className="timezone-info text-center">
-            <p>Current time in {city}: {currentTime}</p>
+            <p>Current time in New York: {currentTime}</p>
           </div>
         </div>
 
         <div className="relative z-10 mb-8">
-          {isMounted && (
-            <div className="globe-container flex justify-center">
-              <Globe
-                width={600}
-                height={600}
-                globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-                backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
-                pointsData={[{
-                  lat: latitude,
-                  lng: longitude,
-                  size: 10,
-                  color: 'red'
-                }]}
-                pointAltitude={0.05}
-                pointColor={() => 'red'}
-                atmosphereColor="rgba(255, 255, 255, 0.5)"
-                atmosphereAltitude={0.25}
-              />
-            </div>
-          )}
-        </div>
-        
-        <div className="relative z-10 mb-8">
-          <div className="input-container max-w-lg mx-auto">
-            <input type="text" name="city" placeholder="City" value={city} onChange={handleCityChange} className="w-full p-2 mb-4 bg-gray-800 text-white rounded"/>
-            <input type="number" name="latitude" placeholder="Latitude" value={latitude} onChange={handleCityChange} className="w-full p-2 mb-4 bg-gray-800 text-white rounded"/>
-            <input type="number" name="longitude" placeholder="Longitude" value={longitude} onChange={handleCityChange} className="w-full p-2 mb-4 bg-gray-800 text-white rounded"/>
-            <input type="text" name="timezone" placeholder="Time Zone" value={timeZone} onChange={handleCityChange} className="w-full p-2 mb-4 bg-gray-800 text-white rounded"/>
+          <div className="globe-container flex justify-center">
+            <Globe
+              width={600}
+              height={600}
+              globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+              backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+              pointsData={[{
+                lat: 40.7128,
+                lng: -74.0060,
+                size: 10,
+                color: 'red'
+              }]}
+              pointAltitude={0.05}
+              pointColor={() => 'red'}
+              atmosphereColor="rgba(255, 255, 255, 0.5)"
+              atmosphereAltitude={0.25}
+            />
           </div>
         </div>
-        
       </TracingBeam>
     </div>
   );

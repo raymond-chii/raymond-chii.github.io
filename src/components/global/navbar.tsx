@@ -10,7 +10,7 @@ const Navbar = (props: Props) => {
       <aside className='flex items-center gap-[2px]'>
         <p className='text-3xl font-bold'> Portfolio</p>
       </aside>
-      <nav className='relative flex justify-center flex-1'>
+      <nav className='relative flex justify-center flex-1 font-semibold'>
         <ul className='flex items-center gap-4 list-none'>
           <li>
             <Link href="/about">About</Link>
