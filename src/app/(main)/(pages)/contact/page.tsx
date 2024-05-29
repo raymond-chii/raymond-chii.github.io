@@ -19,10 +19,12 @@ const Contact = () => {
   const [longitude, setLongitude] = useState(-74.0060);
   const [timeZone, setTimeZone] = useState('America/New_York');
   const [isMounted, setIsMounted] = useState(false);
+  const [currentTime, setCurrentTime] = useState('');
 
   useEffect(() => {
     setIsMounted(true);
-  }, []);
+    setCurrentTime(moment().tz(timeZone).format('MMMM Do YYYY, h:mm:ss a'));
+  }, [timeZone]);
 
   const handleCityChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
@@ -65,7 +67,7 @@ const Contact = () => {
         
         <div className="relative z-10">
           <div className="timezone-info text-center">
-            <p>Current time in {city}: {moment().tz(timeZone).format('MMMM Do YYYY, h:mm:ss a')}</p>
+            <p>Current time in {city}: {currentTime}</p>
           </div>
         </div>
 
@@ -75,7 +77,7 @@ const Contact = () => {
               <Globe
                 width={600}
                 height={600}
-                globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+                globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
                 backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
                 pointsData={[{
                   lat: latitude,
