@@ -88,3 +88,12 @@ input {
   outline: none;
   flex-grow: 1;
 }
+
+a.download-link {
+  color: #4db8ff;
+  text-decoration: underline;
+}
+
+a.download-link:hover {
+  color: #007acc;
+}

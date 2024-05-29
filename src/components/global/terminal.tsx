@@ -34,6 +34,7 @@ const Terminal = () => {
             `ls - Lists available directories\n` +
             `cd <directory> - Changes to the specified directory\n` +
             `clear - Clears the terminal screen\n` +
+            `curl resume - Downloads Raymond's resume\n` +
             `help - Displays this help message`
           );
           break;
@@ -45,6 +46,16 @@ const Terminal = () => {
               return;
             } else {
               newOutput.push(`Invalid directory: ${dir}`);
+            }
+          } else if (command.startsWith('curl ')) {
+            const url = command.split(' ')[1];
+            if (url === 'resume') {
+              newOutput.push(
+                `Downloading resume...\n` +
+                `Resume downloaded successfully. <a href="/Raymond Chi Resume.pdf" download class="download-link">Click here to download</a>`
+              );
+            } else {
+              newOutput.push(`Invalid URL: ${url}`);
             }
           } else {
             newOutput.push(`Command not found: ${command}`);
@@ -64,7 +75,7 @@ const Terminal = () => {
 
   const renderOutput = (text: string) => {
     return text.split('\n').map((line, index) => (
-      <div key={index}>{line}</div>
+      <div key={index} dangerouslySetInnerHTML={{ __html: line }}></div>
     ));
   };
 
