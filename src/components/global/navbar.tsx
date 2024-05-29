@@ -13,7 +13,7 @@ const Navbar = (props: Props) => {
       <nav className='relative flex justify-center flex-1 font-semibold'>
         <ul className='flex items-center gap-4 list-none'>
           <li>
-            <Link href="/about">About</Link>
+            <Link href="/">About</Link>
           </li>
           <li>
             <Link href="/projects">Projects</Link>
