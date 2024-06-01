@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithub, faSpotify, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 
-// Dynamically import Globe component with SSR disabled
 const Globe = dynamic(() => import('react-globe.gl'), { ssr: false });
 
 const Contact = () => {
@@ -68,7 +67,7 @@ const Contact = () => {
                 lat: 40.7128,
                 lng: -74.0060,
                 size: 10,
-                color: 'red'
+                color: 'red',
               }]}
               pointAltitude={0.05}
               pointColor={() => 'red'}
