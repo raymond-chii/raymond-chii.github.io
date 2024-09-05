@@ -15,7 +15,7 @@ const TerminalPage = () => {
               <h1 className="text-4xl font-semibold text-black dark:text-white">
                 Terminal <br />
                 <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
-                  Welcome to Raymond's profile
+                  Welcome to Raymond&apos;s profile
                 </span>
               </h1>
             </>

@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --experimental-https",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "export": "next export",
+    "deploy": "next build && touch out/.nojekyll && git add out/ && git commit -m \"Deploy to gh-pages\" && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -24,7 +25,7 @@
     "moment-timezone": "^0.5.45",
     "next": "14.2.3",
     "next-themes": "^0.3.0",
-    "pdfjs-dist": "^4.6.82",
+    "pdfjs-dist": "^2.6.347",
     "react": "^18",
     "react-dom": "^18",
     "react-globe.gl": "^2.27.2",

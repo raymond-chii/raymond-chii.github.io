@@ -36,7 +36,7 @@ const Resume = () => {
           </a>
         </div>
         <div className="resume-viewer mt-8 max-w-3xl mx-auto">
-          <Worker workerUrl={`https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js`}>
+          <Worker workerUrl="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js">
             <div className="pdf-container bg-gray-100 p-4 rounded-lg overflow-y-auto" style={{ height: '80vh' }}>
               <toolbarPluginInstance.Toolbar />
               <Viewer fileUrl="/Raymond Chi resume.pdf" plugins={[toolbarPluginInstance]} />

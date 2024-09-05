@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import { Badge } from "lucide-react";
-import { myBadges } from "@/app/(main)/(pages)/projects/page";
+import { myBadges } from "@/app/(main)/(pages)/projects/data";
 
 export const HoverEffect = ({
   items,

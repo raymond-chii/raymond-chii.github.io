@@ -91,7 +91,7 @@ const Terminal = () => {
       </div>
       <div className="terminal-body">
         <div className="output">
-          <div>Type "help" for help</div>
+          <div>Type &quot;help&quot; for help</div>
           {output.map((line, index) => (
             <div key={index}>{renderOutput(line)}</div>
           ))}

@@ -25,7 +25,7 @@ const About = () => {
           />
           <div className="md:ml-8">
             <p>
-              Hello, I'm Raymond (Lei) Chi. I'm an Electrical Engineering major
+              Hello, I&apos;m Raymond (Lei) Chi. I&apos;m an Electrical Engineering major
               with a minor in Computer Science at The Cooper Union in NYC. I
               have a passion for coding, specializing in circuits, web
               development, and software-driven solutions. I also enjoy playing
