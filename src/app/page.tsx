@@ -2,6 +2,7 @@ import React from "react";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Boxes } from "@/components/ui/background-boxes";
 import { cn } from "@/lib/utils";
+import Link from 'next/link';
 
 const About = () => {
   return (
@@ -19,7 +20,7 @@ const About = () => {
         </div>
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between mb-8">
           <img
-            src="/profile.jpg" 
+            src="/profile.png" 
             alt="Raymond (Lei) Chi"
             className="w-48 h-48 rounded-full mb-4 md:mb-0"
           />
@@ -39,35 +40,8 @@ const About = () => {
             <ul className="list-disc pl-5 space-y-2">
               <li>
                 <strong>The Cooper Union</strong> - Electrical Engineering
-                (Major), Computer Science (Minor)
+                (Major), Computer Science (Minor) 2021 - 2025
               </li>
-              <li>
-                <strong>High School</strong> - School of Science and Technology
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Experience</h2>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>
-                <strong>Intern</strong> at XYZ Company - Worked on software
-                development projects and gained hands-on experience in web
-                development.
-              </li>
-              <li>
-                <strong>Freelance Developer</strong> - Built and maintained
-                several websites and applications for small businesses.
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Skills</h2>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>JavaScript, Python, Java</li>
-              <li>React, Next.js, Tailwind CSS</li>
-              <li>Node.js, Express</li>
-              <li>Docker, Kubernetes</li>
-              <li>HTML, CSS, SASS</li>
             </ul>
           </div>
           <div>
@@ -79,23 +53,91 @@ const About = () => {
               <li>Exploring AI and NLP</li>
             </ul>
           </div>
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Software Skills</h2>
+            <ul className="list-disc pl-5 space-y-2">
+              <li><strong>Language: </strong>JavaScript, Python, Java, C/C++, Matlab, Typescript, Shell Script</li>
+              <li><strong>Database: </strong>PostgreSQL, MySQL, MongoDB, DBeaver</li>
+              <li><strong>Web Development: </strong>React, React-native, Next.js, Flask, Django, SpringBoot, RestAPI</li>
+              <li><strong>DevOps & Cloud: </strong>Docker, Kubernetes, Git, Linux, Azure</li>
+              <li><strong>Library: </strong>LangChain, Tensorflow, Pandas, Scikit-learn, NLTK, BeautifulSoup, Selenium</li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Hardware Skills</h2>
+            <ul className="list-disc pl-5 space-y-2">
+              <li><strong>Hardware Programing:</strong> Verilog, VHDL, RTL coding, Assembly</li>
+              <li><strong>Digital Design: </strong>Xilinx FPGA, AMD Vivado, Digital Logic Design </li>
+              <li><strong>Analog Design:</strong> Cadence, Layout, TSMC 65 nm PDK, LTspice</li>
+              <li><strong>Lab equipment: </strong>Signal Generator, Oscilloscope, Power Meter </li>
+              <li><strong>Microcontroller: </strong>Arduino, Raspberry Pi, Linux</li>
+            </ul>
+          </div>
         </div>
         <div className="relative z-10 mt-8">
-          <h2 className="text-2xl font-semibold mb-4">Projects</h2>
+          <h2 className="text-2xl font-semibold mb-4">Experience</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Link href="https://www.linkedin.com/company/globalkeysolutions/" passHref legacyBehavior>
+              <a className="block hover:opacity-80 transition-opacity">
+                <div className="bg-gray-800 p-4 rounded-lg h-full">
+                  <h3 className="text-xl font-semibold mb-2">Software Engineer Intern at Global Key Solutions</h3>
+                  <ul className="list-disc pl-5">
+                    <li>Developed a LangChain-powered chatbot using RAG and SQL/PGQ, automating data retrieval and enhancing reliability.</li>
+                    <li>Designed MySQL tables and APIs, integrating automated pipelines for production deployment.</li>
+                    <li>Automated OCR text extraction from PDFs and streamlined data processing workflows.</li>
+                    <li>Built a periodic web scraper with Beautiful Soup and Selenium, updating 3,000 entries in the production database.</li>
+                    <li>Contributed to Agile weekly sprints with Jira, ensuring continuous delivery and team collaboration.</li>
+                  </ul>
+                </div>
+              </a>
+            </Link>
+            <Link href="https://www.linkedin.com/company/bluestamp-engineering/" passHref legacyBehavior>
+              <a className="block hover:opacity-80 transition-opacity">
+                <div className="bg-gray-800 p-4 rounded-lg h-full">
+                <h3 className="text-xl font-semibold mb-2">Robotics Instructor at BlueStamp Engineering</h3>
+                  <ul className="list-disc pl-5">
+                    <li>Led students in IoT and embedded systems projects using Arduino and Raspberry Pi, driving hands-on expertise.</li>
+                    <li>Guided autonomous robotics projects, focusing on OpenCV-based object detection.</li>
+                    <li>Directed Flask-controlled robotics projects, emphasizing the integration of web interfaces in IoT solutions.</li>
+                    <li>Mentored students on sensors, microcontrollers, and communication protocols, equipped IoT and embedded systems skills.</li>
+                  </ul>
+                  </div>
+              </a>
+            </Link>
+            <Link href="https://www.linkedin.com/company/ambedded-technology-co-ltd-/" passHref legacyBehavior>
+              <a className="block hover:opacity-80 transition-opacity">
+                <div className="bg-gray-800 p-4 rounded-lg h-full">
+                  <div className="bg-gray-800 p-4 rounded-lg">
+                  <h3 className="text-xl font-semibold mb-2">Software Engineer Intern at Ambedded Technology Co., Ltd.</h3>
+                    <ul className="list-disc pl-5">
+                    <li>Conducted FIO test on Jenkins, to find optimal throughput of cores-to-driver ratio for Ceph storage ARM-based cluster.</li>
+                    <li>Enhanced FIO script for multiple test runs; Developed Linux network latency tests for cluster assessment.</li>
+                    <li>Improved Ceph storage read/write latency by 10% through tuning Linux network's sysctl parameters.</li>
+                    <li>Analyzed latency and runtime data to fine-tune system parameters, optimizing performance and creating visual reports.</li>
+                    <li>Explored DPDK, an open-source solution, to elevate network latency performance.</li>
+                    </ul>
+                  </div>
+                </div>
+              </a>
+            </Link>
+            <Link href="https://www.linkedin.com/company/loisaida-inc/" passHref legacyBehavior>
+              <a className="block hover:opacity-80 transition-opacity">
+                <div className="bg-gray-800 p-4 rounded-lg h-full">
+                  <div className="bg-gray-800 p-4 rounded-lg">
+                  <h3 className="text-xl font-semibold mb-2">IoT Engineer Intern at Loisiada Inc.</h3>
+                    <ul className="list-disc pl-5">
+                    <li>Deployed over 40 Arduino and Raspberry Pi remote sensing units to monitor urban microclimates.</li>
+                    <li>Implemented Raspberry Pi Edge Gateways for real-time data aggregation and processing.</li>
+                    <li>Developed a Dockerized PostgreSQL database for efficient sensor data storage and visualization.</li>
+                    <li>Engineered a Linux-based mini-PC hub for reliable data collection and seamless system integration.</li>
+                    </ul>
+                  </div>
+                </div>
+              </a>
+            </Link>
             <div className="bg-gray-800 p-4 rounded-lg">
-              <h3 className="text-xl font-semibold mb-2">Project 1</h3>
-              <p>
-                A web application that allows users to track their fitness
-                progress and set goals.
-              </p>
-            </div>
-            <div className="bg-gray-800 p-4 rounded-lg">
-              <h3 className="text-xl font-semibold mb-2">Project 2</h3>
-              <p>
-                An e-commerce platform that provides a seamless shopping
-                experience for users.
-              </p>
+            <h3 className="text-xl font-semibold mb-2">Webmaster at The Cooper Union</h3>
+              <li>Webmaster (front-end) for the School of Engineering's Capstone Senior Project Showcase website.</li>
             </div>
           </div>
         </div>

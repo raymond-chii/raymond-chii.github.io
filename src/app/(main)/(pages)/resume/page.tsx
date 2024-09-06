@@ -39,7 +39,7 @@ const Resume = () => {
           <Worker workerUrl="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js">
             <div className="pdf-container bg-gray-100 p-4 rounded-lg overflow-y-auto" style={{ height: '80vh' }}>
               <toolbarPluginInstance.Toolbar />
-              <Viewer fileUrl="/Raymond Chi resume.pdf" plugins={[toolbarPluginInstance]} />
+              <Viewer fileUrl="/SW Raymond Chi.pdf" plugins={[toolbarPluginInstance]} />
             </div>
           </Worker>
         </div>
