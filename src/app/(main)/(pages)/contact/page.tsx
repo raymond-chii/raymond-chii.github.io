@@ -13,45 +13,72 @@ import { motion } from "framer-motion";
 
 const Globe = dynamic(() => import('react-globe.gl'), { ssr: false });
 
+// Define interfaces for type safety
+interface Location {
+  lat: number;
+  lng: number;
+  city: string;
+}
+
+interface MarkerData extends Location {
+  size: number;
+  color: string;
+}
+
+interface RingData extends Location {
+  maxR: number;
+  propagationSpeed: number;
+  repeatPeriod: number;
+  color: () => string;
+}
+
+interface ArcData {
+  startLat: number;
+  startLng: number;
+  endLat: number;
+  endLng: number;
+  color: string;
+}
+
 const Contact = () => {
   const [timeZone] = useState('America/New_York');
   const [currentTime, setCurrentTime] = useState('');
   const [globeReady, setGlobeReady] = useState(false);
-  const [coordinates] = useState({
-    latitude: 40.7128,
-    longitude: -74.0060
-  });
 
-  const NYC_COORDINATES = {
+  // Define NYC coordinates with proper typing
+  const NYC_COORDINATES: Location = {
     lat: 40.7128,
     lng: -74.0060,
     city: 'New York City'
   };
 
   // Create markers data
-  const markersData = useMemo(() => [{
+  const markersData: MarkerData[] = useMemo(() => [{
     ...NYC_COORDINATES,
     size: 0.15,
     color: '#ff4444'
-  }], []);
+  }], [NYC_COORDINATES]);
 
-  // Create rings data for pulsing effect
-  const ringsData = useMemo(() => [{
+  // Create rings data
+  const ringsData: RingData[] = useMemo(() => [{
     ...NYC_COORDINATES,
     maxR: 3,
     propagationSpeed: 3,
     repeatPeriod: 1000,
-    color: () => `rgba(255, 68, 68, ${Math.random() * 0.5 + 0.1})` // Dynamic opacity
-  }], []);
+    color: () => `rgba(255, 68, 68, ${Math.random() * 0.5 + 0.1})`
+  }], [NYC_COORDINATES]);
 
-  // Create arcs data if you want to show connections
-  const arcsData = useMemo(() => [{
-    startLat: NYC_COORDINATES.lat,
-    startLng: NYC_COORDINATES.lng,
-    endLat: NYC_COORDINATES.lat,
-    endLng: NYC_COORDINATES.lng,
-    color: 'rgba(255,68,68,0.3)'
-  }], []);
+  // Create arcs data
+  const N = 20;
+  const arcsData: ArcData[] = useMemo(() => {
+    return Array.from(Array(N).keys()).map(() => ({
+      startLat: NYC_COORDINATES.lat,
+      startLng: NYC_COORDINATES.lng,
+      endLat: (Math.random() - 0.5) * 180,
+      endLng: (Math.random() - 0.5) * 360,
+      color: `rgba(255, 68, 68, ${Math.random() * 0.5})`
+    }));
+  }, [NYC_COORDINATES]);
 
   useEffect(() => {
     const updateTime = () => {
@@ -61,48 +88,6 @@ const Contact = () => {
     const timer = setInterval(updateTime, 1000);
     return () => clearInterval(timer);
   }, [timeZone]);
-
-  // Globe configuration and animation settings
-  const globeConfig = {
-    pointsData: [{
-      lat: coordinates.latitude,
-      lng: coordinates.longitude,
-      size: 0.1,
-      color: '#FF4444',
-      label: 'New York City'
-    }],
-    ringsData: [{
-      lat: coordinates.latitude,
-      lng: coordinates.longitude,
-      maxR: 2,
-      propagationSpeed: 2,
-      repeatPeriod: 1000,
-      color: 'rgba(255,68,68,0.5)'
-    }],
-    globalConfig: {
-      pointRadius: 0.5,
-      pointColor: '#FF4444',
-      pointAltitude: 0.1,
-      ringsAltitude: 0.05,
-      ringColor: () => 'rgba(255,68,68,0.5)',
-      ringMaxRadius: 2,
-      ringPropagationSpeed: 2,
-      ringRepeatPeriod: 1000,
-      backgroundColor: 'rgba(0,0,0,0)',
-      atmosphereColor: 'rgba(255,255,255,0.5)',
-      atmosphereAltitude: 0.25,
-      showAtmosphere: true,
-      enablePointerInteraction: true
-    }
-  };
-
-  // Additional label data for the marker
-  const labelData = useMemo(() => [{
-    ...NYC_COORDINATES,
-    text: 'New York City',
-    color: '#ffffff',
-    size: 0.5
-  }], []);
 
   return (
     <div className="relative min-h-screen p-4 bg-black text-white">
@@ -123,10 +108,10 @@ const Contact = () => {
           </div>
           
           <div className="contact-info flex justify-center space-x-6 mt-6">
-            <SocialLink href="https://www.linkedin.com/in/lei-chi/" icon={faLinkedin} color="blue" />
-            <SocialLink href="https://github.com/raymond-chii" icon={faGithub} color="gray" />
-            <SocialLink href="https://open.spotify.com/user/31behayvze3k4vryzl6uxkvynrvq?si=b99156dd880f459c" icon={faSpotify} color="green" />
-            <SocialLink href="https://www.instagram.com/raycchii/" icon={faInstagram} color="pink" />
+            <SocialButton href="https://www.linkedin.com/in/lei-chi/" icon={faLinkedin} color="blue" />
+            <SocialButton href="https://github.com/raymond-chii" icon={faGithub} color="gray" />
+            <SocialButton href="https://open.spotify.com/user/31behayvze3k4vryzl6uxkvynrvq" icon={faSpotify} color="green" />
+            <SocialButton href="https://www.instagram.com/raycchii/" icon={faInstagram} color="pink" />
           </div>
 
           <div className="mt-6 space-y-2">
@@ -135,7 +120,7 @@ const Contact = () => {
             <ContactInfo icon={faLocationDot} text="New York City, NY" />
           </div>
         </motion.div>
-        
+
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -167,47 +152,22 @@ const Contact = () => {
                 pointColor="color"
                 pointAltitude={0}
                 pointRadius="size"
-                pointLabel={({ city }) => `
-                  <div style="
-                    color: white;
-                    background: rgba(0, 0, 0, 0.8);
-                    padding: 5px 10px;
-                    border-radius: 5px;
-                  ">
-                    ${city}
-                  </div>
-                `}
-                
-                // Rings configuration
+                pointLabel={(d: MarkerData) => d.city}
                 ringsData={ringsData}
                 ringColor="color"
                 ringMaxRadius="maxR"
                 ringPropagationSpeed="propagationSpeed"
                 ringRepeatPeriod="repeatPeriod"
-                
-                // Labels configuration
-                labelsData={labelData}
-                labelLat="lat"
-                labelLng="lng"
-                labelText="text"
-                labelSize="size"
-                labelDotRadius={0.5}
-                labelColor="color"
-                labelResolution={2}
-                
-                // Globe configuration
+                arcsData={arcsData}
+                arcColor="color"
+                arcDashLength={0.4}
+                arcDashGap={0.2}
+                arcDashAnimateTime={1500}
                 atmosphereColor="rgba(255,255,255,0.5)"
                 atmosphereAltitude={0.25}
-                enablePointerInteraction={true}
+                onGlobeReady={() => setGlobeReady(true)}
                 autoRotate={true}
                 autoRotateSpeed={0.5}
-                
-                // Initial position to focus on New York
-                onGlobeReady={() => {
-                  setGlobeReady(true);
-                }}
-                initialCoordinates={[NYC_COORDINATES.lng, NYC_COORDINATES.lat]}
-                center={[NYC_COORDINATES.lng, NYC_COORDINATES.lat]}
               />
             </div>
           </div>
@@ -217,9 +177,17 @@ const Contact = () => {
   );
 };
 
-const SocialLink = ({ href, icon, color }) => (
+interface SocialButtonProps {
+  href: string;
+  icon: any;
+  color: string;
+}
+
+const SocialButton: React.FC<SocialButtonProps> = ({ href, icon, color }) => (
   <motion.a
     href={href}
+    target="_blank"
+    rel="noopener noreferrer"
     whileHover={{ scale: 1.2 }}
     whileTap={{ scale: 0.9 }}
     className={`text-${color}-500 hover:text-${color}-700 transition-colors`}
@@ -228,7 +196,12 @@ const SocialLink = ({ href, icon, color }) => (
   </motion.a>
 );
 
-const ContactInfo = ({ icon, text }) => (
+interface ContactInfoProps {
+  icon: any;
+  text: string;
+}
+
+const ContactInfo: React.FC<ContactInfoProps> = ({ icon, text }) => (
   <motion.p 
     initial={{ opacity: 0, x: -20 }}
     animate={{ opacity: 1, x: 0 }}
