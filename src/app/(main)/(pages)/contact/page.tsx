@@ -152,7 +152,7 @@ const Contact = () => {
                 pointColor="color"
                 pointAltitude={0}
                 pointRadius="size"
-                pointLabel={(d: MarkerData) => d.city}
+                pointLabel="city"
                 ringsData={ringsData}
                 ringColor="color"
                 ringMaxRadius="maxR"
