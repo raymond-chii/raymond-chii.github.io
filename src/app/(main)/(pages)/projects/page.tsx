@@ -7,7 +7,25 @@ import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Boxes } from "@/components/ui/background-boxes";
 import { motion, AnimatePresence } from "framer-motion";
 
-const CategoryButton = ({ name, isActive, onClick }) => (
+// Define types for the project structure
+interface Project {
+  title: string;
+  description: string;
+  link: string;
+  tags: string[];
+}
+
+interface CategoryButtonProps {
+  name: string;
+  isActive: boolean;
+  onClick: () => void;
+}
+
+interface ProjectCardProps {
+  project: Project;
+}
+
+const CategoryButton: React.FC<CategoryButtonProps> = ({ name, isActive, onClick }) => (
   <button
     onClick={onClick}
     className={cn(
@@ -22,7 +40,7 @@ const CategoryButton = ({ name, isActive, onClick }) => (
   </button>
 );
 
-const ProjectCard = ({ project }) => (
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -48,23 +66,37 @@ const ProjectCard = ({ project }) => (
   </motion.div>
 );
 
-export default function Projects() {
-  const [activeCategory, setActiveCategory] = useState('all');
+// Define type for the category structure
+interface Category {
+  title: string;
+  description: string;
+  projects: Project[];
+}
+
+interface ProjectCategories {
+  [key: string]: Category;
+}
+
+const Projects: React.FC = () => {
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+  
+  // Type assertion for projectCategories
+  const typedProjectCategories = projectCategories as ProjectCategories;
   
   // Get all categories plus 'all'
-  const categories = ['all', ...Object.keys(projectCategories)];
+  const categories = ['all', ...Object.keys(typedProjectCategories)];
 
   // Get projects based on active category
-  const getFilteredProjects = () => {
+  const getFilteredProjects = (): Project[] => {
     if (activeCategory === 'all') {
-      return Object.values(projectCategories).flatMap(category => category.projects);
+      return Object.values(typedProjectCategories).flatMap(category => category.projects);
     }
-    return projectCategories[activeCategory]?.projects || [];
+    return typedProjectCategories[activeCategory]?.projects || [];
   };
 
-  const getCategoryTitle = (category: string) => {
+  const getCategoryTitle = (category: string): string => {
     if (category === 'all') return 'All Projects';
-    return projectCategories[category]?.title || '';
+    return typedProjectCategories[category]?.title || '';
   };
 
   return (
@@ -110,4 +142,6 @@ export default function Projects() {
       </TracingBeam>
     </div>
   );
-}
+};
+
+export default Projects;

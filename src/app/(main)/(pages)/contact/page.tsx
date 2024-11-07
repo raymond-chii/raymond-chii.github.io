@@ -45,12 +45,12 @@ const Contact = () => {
   const [currentTime, setCurrentTime] = useState('');
   const [globeReady, setGlobeReady] = useState(false);
 
-  // Define NYC coordinates with proper typing
-  const NYC_COORDINATES: Location = {
+  // Memoize NYC coordinates
+  const NYC_COORDINATES: Location = useMemo(() => ({
     lat: 40.7128,
     lng: -74.0060,
     city: 'New York City'
-  };
+  }), []);
 
   // Create markers data
   const markersData: MarkerData[] = useMemo(() => [{
@@ -166,8 +166,6 @@ const Contact = () => {
                 atmosphereColor="rgba(255,255,255,0.5)"
                 atmosphereAltitude={0.25}
                 onGlobeReady={() => setGlobeReady(true)}
-                autoRotate={true}
-                autoRotateSpeed={0.5}
               />
             </div>
           </div>
