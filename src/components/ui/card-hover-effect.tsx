@@ -2,20 +2,23 @@ import { cn } from "@/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
-import { Badge } from "lucide-react";
-import { myBadges } from "@/app/(main)/(pages)/projects/data";
+
+interface ProjectItem {
+  title: string;
+  description: string;
+  link: string;
+  tags?: string[];
+}
+
+interface HoverEffectProps {
+  items: ProjectItem[];
+  className?: string;
+}
 
 export const HoverEffect = ({
   items,
   className,
-}: {
-  items: {
-    title: string;
-    description: string;
-    link: string;
-  }[];
-  className?: string;
-}) => {
+}: HoverEffectProps) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
@@ -53,15 +56,15 @@ export const HoverEffect = ({
           <Card>
             <CardTitle>{item.title}</CardTitle>
             <CardDescription>{item.description}</CardDescription>
-            <div className="mt-4">
-              {myBadges
-                .filter(badge => badge.projects.includes(item.title))
-                .map(badge => (
-                  <span key={badge.name} className="inline-block bg-gray-700 text-white rounded-full px-3 py-1 text-sm font-semibold mr-2">
-                    {badge.name}
+            {item.tags && (
+              <div className="mt-4">
+                {item.tags.map(tag => (
+                  <span key={tag} className="inline-block bg-gray-700 text-white rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">
+                    {tag}
                   </span>
                 ))}
-            </div>
+              </div>
+            )}
           </Card>
         </Link>
       ))}
