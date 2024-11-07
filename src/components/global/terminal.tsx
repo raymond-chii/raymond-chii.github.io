@@ -40,8 +40,11 @@ const Terminal = () => {
           break;
         default:
           if (command.startsWith('cd ')) {
+            
             const dir = command.split(' ')[1];
-            if (['about', 'projects', 'contact', 'resume'].includes(dir)) {
+            if (dir === 'about') {
+              window.location.href = '/'
+            } else if (['projects', 'contact', 'resume'].includes(dir)) {
               window.location.href = `/${dir}`;
               return;
             } else {
