@@ -1,9 +1,39 @@
 // data.tsx
 export const projectCategories = {
+  current: {
+    title: "Current",
+    description: "Full-stack development, web applications, and system architecture",
+    projects: [
+      {
+        title: "Personal Portfolio Website",
+        description: "A modern, responsive portfolio website built with Next.js, React, and Tailwind CSS. Features interactive UI components, terminal emulation, and dynamic content rendering.",
+        link: "https://github.com/your-username/portfolio",
+        tags: ["React", "Next.js", "Tailwind", "TypeScript"]
+      },
+      {
+        title: "LangChain Chatbot",
+        description: "Developed an intelligent chatbot using LangChain, implementing RAG architecture and SQL/PGQ for automated data retrieval and processing.",
+        link: "https://github.com/your-username/langchain-chatbot",
+        tags: ["Python", "LangChain", "SQL", "API"]
+      },
+      {
+        title: "Web Scraping Pipeline",
+        description: "Automated data collection system using Beautiful Soup and Selenium, processing and updating over 3,000 database entries.",
+        link: "https://github.com/your-username/web-scraper",
+        tags: ["Python", "Beautiful Soup", "Selenium", "PostgreSQL"]
+      }
+    ]
+  },
   software: {
     title: "Software Projects",
     description: "Full-stack development, web applications, and system architecture",
     projects: [
+      {
+        title: "Pfizer Digital Hackathon, 2nd Place Winner, CUCU - Mental Health Platform",
+        description: "Developed a mood-classification algorithm and journaling tool for NYC public high school students, connecting them to licensed social workers to address mental health inequities in underserved communities.",
+        link: "https://github.com/raymond-chii/hackathon/tree/main",
+        tags: ["Pfizer", "Hackathon", "Python", "NLP", "ML", "Frontend Design"]
+      },
       {
         title: "Personal Portfolio Website",
         description: "A modern, responsive portfolio website built with Next.js, React, and Tailwind CSS. Features interactive UI components, terminal emulation, and dynamic content rendering.",

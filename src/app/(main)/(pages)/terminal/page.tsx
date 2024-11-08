@@ -7,21 +7,21 @@ import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 
 const TerminalPage = () => {
   return (
-    <div className="min-h-screen p-4">
+    <div className="min-h-screen w-full overflow-hidden">
       <div className="desktop-background">
         <ContainerScroll
           titleComponent={
-            <>
-              <h1 className="text-4xl font-semibold text-black dark:text-white">
+            <div className="text-center mb-4">
+              <h1 className="text-4xl font-semibold text-white">
                 Terminal <br />
                 <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
                   Welcome to Raymond&apos;s profile
                 </span>
               </h1>
-            </>
+            </div>
           }
         >
-          <div className="terminal-container">
+          <div className="terminal-outer-container">
             <Terminal />
           </div>
         </ContainerScroll>

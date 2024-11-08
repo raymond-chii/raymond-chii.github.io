@@ -1,16 +1,23 @@
+"use client";
+
 import React, { useState, useEffect, useRef } from 'react';
+import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 
 const Terminal = () => {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const [output, setOutput] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const terminalBodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  }, []);
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
+    }
+  }, [output]);
 
   const handleCommand = (command: string) => {
     let newOutput = [...output];
@@ -29,21 +36,20 @@ const Terminal = () => {
           break;
         case 'help':
           newOutput.push(
-            `Available commands:\n` +
-            `whoami - Displays the current user\n` +
-            `ls - Lists available directories\n` +
-            `cd <directory> - Changes to the specified directory\n` +
-            `clear - Clears the terminal screen\n` +
-            `curl resume - Downloads Raymond's resume\n` +
-            `help - Displays this help message`
+            'Available commands:',
+            'whoami - Displays the current user',
+            'ls - Lists available directories',
+            'cd <directory> - Changes to the specified directory',
+            'clear - Clears the terminal screen',
+            'curl resume - Downloads Raymond\'s resume',
+            'help - Displays this help message'
           );
           break;
         default:
           if (command.startsWith('cd ')) {
-            
             const dir = command.split(' ')[1];
-            if (dir === 'about') {
-              window.location.href = '/'
+            if (dir == 'about'){
+              window.location.href = '/';
             } else if (['projects', 'contact', 'resume'].includes(dir)) {
               window.location.href = `/${dir}`;
               return;
@@ -54,8 +60,8 @@ const Terminal = () => {
             const url = command.split(' ')[1];
             if (url === 'resume') {
               newOutput.push(
-                `Downloading resume...\n` +
-                `Resume downloaded successfully. <a href="/Raymond Chi Resume.pdf" download class="download-link">Click here to download</a>`
+                'Downloading resume...',
+                'Resume downloaded successfully. <a href="/Raymond Chi Resume.pdf" download class="download-link">Click here to download</a>'
               );
             } else {
               newOutput.push(`Invalid URL: ${url}`);
@@ -76,12 +82,6 @@ const Terminal = () => {
     setInput('');
   };
 
-  const renderOutput = (text: string) => {
-    return text.split('\n').map((line, index) => (
-      <div key={index} dangerouslySetInnerHTML={{ __html: line }}></div>
-    ));
-  };
-
   return (
     <div className="terminal-window">
       <div className="terminal-header">
@@ -92,21 +92,26 @@ const Terminal = () => {
         </div>
         <div className="terminal-title">Terminal</div>
       </div>
-      <div className="terminal-body">
-        <div className="output">
-          <div>Type &quot;help&quot; for help</div>
+      <div ref={terminalBodyRef} className="terminal-body">
+        <div className="terminal-content">
+          <div className="mb-2">Type &quot;help&quot; for help</div>
           {output.map((line, index) => (
-            <div key={index}>{renderOutput(line)}</div>
+            <div key={index} className="mb-1" dangerouslySetInnerHTML={{ __html: line }} />
           ))}
+          <div className="terminal-input-line">
+            <span className="terminal-prompt">guest@system:~$</span>
+            <form onSubmit={handleSubmit} className="terminal-form">
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="terminal-input"
+                spellCheck="false"
+                autoComplete="off"
+              />
+            </form>
+          </div>
         </div>
-        <form onSubmit={handleSubmit}>
-          <span>guest@system:~$ </span>
-          <input
-            ref={inputRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-        </form>
       </div>
     </div>
   );
