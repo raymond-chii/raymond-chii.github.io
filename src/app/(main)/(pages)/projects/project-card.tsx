@@ -125,9 +125,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     if (project.github) {
       try {
         await sdk.openGithubProject(`${project.github.username}/${project.github.repo}`, {
-          theme: 'dark',
-          hideNavigation: false,
-          hideDevTools: false,
+          theme: 'dark'
         });
       } catch (err) {
         console.error('Failed to open project in StackBlitz:', err);
