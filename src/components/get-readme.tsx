@@ -4,6 +4,7 @@ interface GetRepoREADME {
   repo: string;
   owner: string;
 }
+
 export async function getGithubREADME({ repo, owner }: GetRepoREADME) {
   try {
     const response = await fetch(
@@ -16,7 +17,12 @@ export async function getGithubREADME({ repo, owner }: GetRepoREADME) {
     if (!text) {
       throw new Error("no parsable readme");
     }
-    const output_html = convertMarkdownToHtml(text);
+    const output_html = convertMarkdownToHtml(text, {
+      githubRepo: {
+        username: owner,
+        repo: repo
+      }
+    });
     return output_html;
   } catch (error) {
     console.log(" === error === ", error);

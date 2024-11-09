@@ -2,7 +2,14 @@ import showdown from 'showdown';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github-dark.css';
 
-export function convertMarkdownToHtml(markdown: string): string {
+interface ParseOptions {
+  githubRepo?: {
+    username: string;
+    repo: string;
+  };
+}
+
+export function convertMarkdownToHtml(markdown: string, options?: ParseOptions): string {
     showdown.extension("highlight", function () {
         function htmlunencode(text: string): string {
             return text
@@ -46,14 +53,50 @@ export function convertMarkdownToHtml(markdown: string): string {
         ];
     });
 
+    // Helper function to convert relative paths to absolute GitHub URLs
+    function convertToGithubUrl(relativePath: string): string {
+        if (!options?.githubRepo) return relativePath;
+        const { username, repo } = options.githubRepo;
+        
+        // Remove leading slash if present
+        const cleanPath = relativePath.replace(/^\//, '');
+        
+        return `https://raw.githubusercontent.com/${username}/${repo}/main/${cleanPath}`;
+    }
+
     showdown.extension("fixImages", function() {
         return [{
+            type: "lang",
+            filter: function(text: string) {
+                // Handle markdown image syntax
+                return text.replace(
+                    /!\[(.*?)\]\(([^)]+)\)/g,
+                    (match, alt, src) => {
+                        // Only convert if it's not already an absolute URL
+                        if (!src.startsWith('http')) {
+                            const absoluteUrl = convertToGithubUrl(src);
+                            return `![${alt}](${absoluteUrl})`;
+                        }
+                        return match;
+                    }
+                );
+            }
+        }, {
             type: "output",
             filter: function(text: string) {
-                // Add loading="lazy" and class to all images
+                // Handle any remaining relative paths in HTML img tags
+                text = text.replace(
+                    /<img([^>]*)src=["'](?!http)([^"']+)["']/g,
+                    (match, attrs, src) => {
+                        const absoluteUrl = convertToGithubUrl(src);
+                        return `<img${attrs}src="${absoluteUrl}"`;
+                    }
+                );
+
+                // Add loading="lazy" and other attributes
                 return text.replace(
                     /<img([^>]*)>/g,
-                    '<img$1 loading="lazy" class="rounded-lg shadow-lg" style="max-width: 100%; height: auto;" onerror="this.style.display=\'none\'"/>'
+                    '<img$1 loading="lazy" class="rounded-lg shadow-lg" style="max-width: 100%; height: auto;" onerror="this.onerror=null; this.style.display=\'none\'"/>'
                 );
             }
         }];
@@ -72,6 +115,17 @@ export function convertMarkdownToHtml(markdown: string): string {
         omitExtraWLInCodeBlocks: true,
         encodeEmails: true,
     });
+
+    // Pre-process markdown to handle image paths
+    if (options?.githubRepo) {
+        markdown = markdown.replace(
+            /!\[([^\]]*)\]\((?!http)([^)]+)\)/g,
+            (match, alt, src) => {
+                const absoluteUrl = convertToGithubUrl(src);
+                return `![${alt}](${absoluteUrl})`;
+            }
+        );
+    }
 
     return converter.makeHtml(markdown);
 }
