@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import Navbar from "@/components/global/navbar";
 const font = DM_Sans({ subsets: ["latin"] });
+import "../components/markdown-parser.css";
 
 export const metadata: Metadata = {
   title: "Raymond (Lei) Chi",

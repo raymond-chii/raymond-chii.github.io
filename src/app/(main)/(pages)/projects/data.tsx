@@ -32,7 +32,11 @@ export const projectCategories = {
         title: "Pfizer Digital Hackathon, 2nd Place Winner, CUCU - Mental Health Platform",
         description: "Developed a mood-classification algorithm and journaling tool for NYC public high school students, connecting them to licensed social workers to address mental health inequities in underserved communities.",
         link: "https://github.com/raymond-chii/hackathon/tree/main",
-        tags: ["Pfizer", "Hackathon", "Python", "NLP", "ML", "Frontend Design"]
+        tags: ["Pfizer", "Hackathon", "Python", "NLP", "ML", "Frontend Design"],
+        github: {
+          username: "raymond-chii",
+          repo: "hackathon"
+        }
       },
       {
         title: "Personal Portfolio Website",

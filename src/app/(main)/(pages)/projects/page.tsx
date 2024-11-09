@@ -6,6 +6,7 @@ import { projectCategories } from "@/app/(main)/(pages)/projects/data";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Boxes } from "@/components/ui/background-boxes";
 import { motion, AnimatePresence } from "framer-motion";
+import ProjectCard from './project-card'; 
 
 // Define types for the project structure
 interface Project {
@@ -40,31 +41,31 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({ name, isActive, onClick
   </button>
 );
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: 20 }}
-    transition={{ duration: 0.3 }}
-    className="bg-gray-800/50 rounded-lg p-6 hover:bg-gray-800/80 transition-all group"
-  >
-    <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-400">
-      <a href={project.link} target="_blank" rel="noopener noreferrer" 
-         className="hover:underline">
-        {project.title}
-      </a>
-    </h3>
-    <p className="text-gray-300 mb-4">{project.description}</p>
-    <div className="flex flex-wrap gap-2">
-      {project.tags.map((tag) => (
-        <span key={tag} 
-              className="px-3 py-1 text-sm bg-gray-700 rounded-full text-gray-200">
-          {tag}
-        </span>
-      ))}
-    </div>
-  </motion.div>
-);
+// const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
+//   <motion.div
+//     initial={{ opacity: 0, y: 20 }}
+//     animate={{ opacity: 1, y: 0 }}
+//     exit={{ opacity: 0, y: 20 }}
+//     transition={{ duration: 0.3 }}
+//     className="bg-gray-800/50 rounded-lg p-6 hover:bg-gray-800/80 transition-all group"
+//   >
+//     <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-400">
+//       <a href={project.link} target="_blank" rel="noopener noreferrer" 
+//          className="hover:underline">
+//         {project.title}
+//       </a>
+//     </h3>
+//     <p className="text-gray-300 mb-4">{project.description}</p>
+//     <div className="flex flex-wrap gap-2">
+//       {project.tags.map((tag) => (
+//         <span key={tag} 
+//               className="px-3 py-1 text-sm bg-gray-700 rounded-full text-gray-200">
+//           {tag}
+//         </span>
+//       ))}
+//     </div>
+//   </motion.div>
+// );
 
 // Define type for the category structure
 interface Category {
@@ -131,7 +132,7 @@ const Projects: React.FC = () => {
         
         {/* Projects Grid */}
         <div className="relative z-10 max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
             <AnimatePresence mode='wait'>
               {getFilteredProjects().map((project, index) => (
                 <ProjectCard key={`${activeCategory}-${index}`} project={project} />
