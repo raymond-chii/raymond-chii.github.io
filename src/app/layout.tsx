@@ -7,7 +7,7 @@ const font = DM_Sans({ subsets: ["latin"] });
 import "../components/markdown-parser.css";
 
 export const metadata: Metadata = {
-  title: "Raymond (Lei) Chi",
+  title: "Raymond Chi",
   description: "Raymond (Lei) Chi's personal website",
 };
 
