@@ -42,7 +42,7 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 text-transparent bg-clip-text"
             >
-              Portfolio
+              Raymond Chi
             </motion.span>
           </Link>
 

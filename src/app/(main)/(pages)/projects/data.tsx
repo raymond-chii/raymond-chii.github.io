@@ -12,7 +12,7 @@ export const projectCategories = {
       },
       {
         title: "Intelligent Beamforming",
-        description: "Developed an intelligent chatbot using LangChain, implementing RAG architecture and SQL/PGQ for automated data retrieval and processing.",
+        description: "This project investigates beamforming techniques for wireless networks using an extended Kalman filter, reinforcement learning (RL), and deep learning (DL) models. We will simulate and compare each method to identify the most effective approach, which will then be tested on the COSMOS testbed at Columbia University. Building on previous COSMOS research in RL-based beamforming, this project aims to enhance real-world wireless performance through adaptive algorithms.",
         link: "",
         tags: ["Communication Systems", "Signal Processing", "Adaptive Filtering", "Machine Learning"]
       },
@@ -51,7 +51,17 @@ export const projectCategories = {
           username: "The-Pioneer-Cooper-Union",
           repo: "The-Pioneer"
         }
-      }
+      },
+      {
+        title: "Operating System Projects",
+        description: "A suite of Unix system utilities including a custom shell, filesystem analyzer, and file concatenation tool. Built in C using system calls, demonstrating low-level systems programming and process management in Unix environments.",
+        link: "https://github.com/raymond-chii/Operating-System",
+        tags: ["C", "Unix System Calls", "Process Management", "File Systems", "Shell Scripting"],
+        github: {
+          username: "raymond-chii",
+          repo: "Operating-System"
+        }
+      },
     ]
   },
   ml: {
@@ -121,16 +131,26 @@ export const projectCategories = {
     description: "FPGA, embedded systems, and hardware design",
     projects: [
       {
-        title: "Urban Microclimate Monitoring",
-        description: "Deployed network of 40+ Arduino and Raspberry Pi units for environmental monitoring with real-time data processing.",
-        link: "https://github.com/your-username/climate-monitor",
-        tags: ["Arduino", "Raspberry Pi", "IoT", "Sensors"]
+        title: "Hardware Design Projects",
+        description: "This is where I put my hardware design projects. There are various projects in this category. Projects include mips 64 bit cpu on FPGA and oled display controller, etc.",
+        link: "https://github.com/raymond-chii/Hardware-Design",
+        tags: ["FPGA", "AMD Xilinx", "Hardware Design", "Verilog"],
+        github: {
+          username: "raymond-chii",
+          repo: "Hardware-Design"
+        }
       },
       {
-        title: "FPGA-based System",
-        description: "Digital design project implementing custom hardware architecture on Xilinx FPGA using Verilog.",
+        title: "Image display (VGA) on FPGA",
+        description: "Engineered an image display system on FPGA using SystemVerilog and AMD Vivado Design Suite, involving signal processing techniques to fine-tune resolution through dynamic image downsizing and upsizing.",
         link: "https://github.com/your-username/fpga-project",
-        tags: ["Verilog", "FPGA", "Digital Design", "Hardware"]
+        tags: ["Verilog", "FPGA", "Digital Design", "Hardware", "Matlab"],
+      },
+      {
+        title: "Theremin",
+        description: "Built a Theremin with envelop detector, op amps, high/low pass filters, and coupling capacitors to play musical notes via hand gestures.",
+        link: "https://www.youtube.com/watch?v=dI7TFS5GAgQ&t=5s",
+        tags: ["Circuit Design", "Signal Processing", "Electronic Design"],
       }
     ]
   }

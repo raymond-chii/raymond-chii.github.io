@@ -59,7 +59,7 @@ const About = () => {
               <li><strong>Language: </strong>JavaScript, Python, Java, C/C++, Matlab, Typescript, Shell Script</li>
               <li><strong>Database: </strong>PostgreSQL, MySQL, MongoDB, DBeaver</li>
               <li><strong>Web Development: </strong>React, React-native, Next.js, Flask, Django, SpringBoot, RestAPI</li>
-              <li><strong>DevOps & Cloud: </strong>Docker, Kubernetes, Git, Linux, Azure</li>
+              <li><strong>DevOps & Cloud: </strong>Docker, GCP, Git, Linux, Azure, Kubernetes</li>
               <li><strong>Library: </strong>LangChain, Tensorflow, Pandas, Scikit-learn, NLTK, BeautifulSoup, Selenium</li>
             </ul>
           </div>
@@ -77,6 +77,20 @@ const About = () => {
         <div className="relative z-10 mt-8">
           <h2 className="text-2xl font-semibold mb-4">Experience</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <Link href="https://www.linkedin.com/school/the-cooper-union/" passHref legacyBehavior>
+              <a className="block hover:opacity-80 transition-opacity">
+                <div className="bg-gray-800 p-4 rounded-lg h-full">
+                  <h3 className="text-xl font-semibold mb-2">Undergraduate Researcher at Cooper Union</h3>
+                  <ul className="list-disc pl-5">
+                    <li>Built ML pipeline analyzing 3 cognitive tasks across 157 subjects, implementing GCP GPU infrastructure for accelerated model training.</li>
+                    <li>Engineered multi-modal feature extraction combining acoustic (eGeMAPS), prosodic (DisVoice), and linguistic (NLTK) features, fixing deprecation issues in DisVoice and LFTK.</li>
+                    <li>Developed NLP pipeline using Whisper-timestamped for speech transcription, resolving deprecation conflicts for PyTorch compatibility.</li>
+                    <li>Implemented SMOTE oversampling and feature standardization while handling demographic factors and missing data.</li>
+                    <li>Created scalable Python system for processing audio datasets with comprehensive error handling and time-aligned feature extraction.</li>
+                  </ul>
+                </div>
+              </a>
+            </Link>
             <Link href="https://www.linkedin.com/company/globalkeysolutions/" passHref legacyBehavior>
               <a className="block hover:opacity-80 transition-opacity">
                 <div className="bg-gray-800 p-4 rounded-lg h-full">
@@ -107,7 +121,6 @@ const About = () => {
             <Link href="https://www.linkedin.com/company/ambedded-technology-co-ltd-/" passHref legacyBehavior>
               <a className="block hover:opacity-80 transition-opacity">
                 <div className="bg-gray-800 p-4 rounded-lg h-full">
-                  <div className="bg-gray-800 p-4 rounded-lg">
                   <h3 className="text-xl font-semibold mb-2">Software Engineer Intern at Ambedded Technology Co., Ltd.</h3>
                     <ul className="list-disc pl-5">
                     <li>Conducted FIO test on Jenkins, to find optimal throughput of cores-to-driver ratio for Ceph storage ARM-based cluster.</li>
@@ -116,14 +129,13 @@ const About = () => {
                     <li>Analyzed latency and runtime data to fine-tune system parameters, optimizing performance and creating visual reports.</li>
                     <li>Explored DPDK, an open-source solution, to elevate network latency performance.</li>
                     </ul>
-                  </div>
                 </div>
               </a>
             </Link>
             <Link href="https://www.linkedin.com/company/loisaida-inc/" passHref legacyBehavior>
               <a className="block hover:opacity-80 transition-opacity">
                 <div className="bg-gray-800 p-4 rounded-lg h-full">
-                  <div className="bg-gray-800 p-4 rounded-lg">
+                  
                   <h3 className="text-xl font-semibold mb-2">IoT Engineer Intern at Loisiada Inc.</h3>
                     <ul className="list-disc pl-5">
                     <li>Deployed over 40 Arduino and Raspberry Pi remote sensing units to monitor urban microclimates.</li>
@@ -131,7 +143,7 @@ const About = () => {
                     <li>Developed a Dockerized PostgreSQL database for efficient sensor data storage and visualization.</li>
                     <li>Engineered a Linux-based mini-PC hub for reliable data collection and seamless system integration.</li>
                     </ul>
-                  </div>
+                  
                 </div>
               </a>
             </Link>
